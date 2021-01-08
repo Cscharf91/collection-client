@@ -1,24 +1,76 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NavBar from './modules/NavBar';
+import { useEffect, useState } from 'react';
+import Home from './modules/Home';
+import Login from './modules/Login';
+import CreatePractice from './modules/practices/CreatePractice';
+import Practice from './modules/Practice';
+import EditPractice from './modules/practices/EditPractice';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentToken = JSON.parse(localStorage.getItem('token'));
+    if (currentUser) setUser(currentUser);
+    if (currentToken) setToken(currentToken);
+  }, []);
+
+  const logOut = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+    window.location = "/";
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar 
+        user={user}
+        logOut={logOut}
+      />
+      <Switch>
+        <Route path="/" exact
+          render={props => <Home {...props}
+            user={user}
+          />
+          }
+        />
+        <Route path="/login" exact
+          render={props => <Login {...props}
+            user={user}
+            setUser={setUser}
+            token={token}
+            setToken={setToken}
+          />
+          }
+        />
+        <Route path="/practices/create" exact
+          render={props => <CreatePractice {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/practices/:id" exact
+          render={props => <Practice {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/practices/:id/edit" exact
+          render={props => <EditPractice {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+      </Switch>
+    </Router>
   );
 }
 
