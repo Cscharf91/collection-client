@@ -6,7 +6,6 @@ function CreatePractice(props) {
   const user = JSON.parse(localStorage.user);
   const token = JSON.parse(localStorage.token);
   const [practice, setPractice] = useState({
-    user,
     name: "",
     code: "",
     address: "",

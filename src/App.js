@@ -5,8 +5,11 @@ import { useEffect, useState } from 'react';
 import Home from './modules/Home';
 import Login from './modules/Login';
 import CreatePractice from './modules/practices/CreatePractice';
-import Practice from './modules/Practice';
+import Practice from './modules/practices/Practice';
 import EditPractice from './modules/practices/EditPractice';
+import CreateCollection from './modules/collections/CreateCollection';
+import EditCollection from './modules/collections/EditCollection';
+import Collection from './modules/collections/Collection';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -64,6 +67,27 @@ function App() {
         />
         <Route path="/practices/:id/edit" exact
           render={props => <EditPractice {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/collections/create" exact
+          render={props => <CreateCollection {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/collections/:id" exact
+          render={props => <Collection {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/collections/:id/edit" exact
+          render={props => <EditCollection {...props}
             user={user}
             token={token}
           />
