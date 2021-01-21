@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
 
 function Collections(props) {
+  const token = JSON.parse(localStorage.token);
   const [collections, setCollections] = useState([]);
   const [search, setSearch] = useState('');
   const [error, setError] = useState();
@@ -33,6 +34,19 @@ function Collections(props) {
     if (searchResult) window.location = `/collections/${searchResult._id}`;
   }
 
+  const handleDelete = async (id) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Are you sure you want to delete this?')) {
+      try {
+        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/collections/${id}`, token);
+        const updatedCollections = collections.filter(collection => collection._id !== id);
+        setCollections(updatedCollections);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
   return (
     <div>
       <div className="searchbox">
@@ -48,6 +62,7 @@ function Collections(props) {
             <CollectionComponent collection={collection} />
             <Link to={`/collections/${collection._id}`}><p>View Collection</p></Link>
             <Link to={`/collections/${collection._id}/edit`}><p>Edit Collection</p></Link>
+            <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
           </div>
           <div className="collection-scan">
             {collection.scan && <img className="scan-img" src={collection.scan} alt="scan" />}

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
 
 function Collection(props) {
@@ -48,6 +49,18 @@ function Collection(props) {
     setSelectedFile(e.target.files[0]);
   }
 
+  const handleDelete = async (id) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Are you sure you want to delete this?')) {
+      try {
+        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/collections/${id}`);
+        window.location = '/collections';
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
   return (
     <div>
       <div className="card-grid">
@@ -57,6 +70,8 @@ function Collection(props) {
           {collection && collection.practice && (
           <CollectionComponent collection={collection} />
           )}
+          <Link to={`/collections/${collection._id}/edit`}><p>Edit Collection</p></Link>
+          <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
         </div>
         <div className="collection-scan">
           {scan && <img className="scan-img" src={scan} alt="scan" />}

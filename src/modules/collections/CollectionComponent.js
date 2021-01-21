@@ -1,8 +1,8 @@
 import React from "react";
+import { DateTime } from 'luxon';
 
 function CollectionComponent(props) {
   const { collection } = props;
-  console.log(collection);
   return (
     <div>
       {collection.fname && <p><strong>First Name:</strong> {collection.fname}</p>}
@@ -18,8 +18,8 @@ function CollectionComponent(props) {
       {collection.city && <p><strong>City:</strong> {collection.city}</p>}
       {collection.state && <p><strong>State:</strong> {collection.state}</p>}
       {collection.zip && <p><strong>Zip:</strong> {collection.zip}</p>}
-    </div>
-  );
+      {collection && <p><strong>Collection Added:</strong> {DateTime.fromISO(collection.date).toLocaleString()}</p>}
+    </div>);
 }
 
 export default CollectionComponent;

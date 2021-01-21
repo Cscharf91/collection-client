@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PracticeComponent from "./PracticeComponent";
 
 function Practice(props) {
+  const token = JSON.parse(localStorage.token);
   const [practice, setPractice] = useState({});
   const [collections, setCollections] = useState([]);
   const [error, setError] = useState();
@@ -34,6 +35,17 @@ function Practice(props) {
     getPracticeCollections();
   }, [props.match.params.id]);
 
+  const handleDelete = async (id) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Are you sure you want to delete this?')) {
+      try {
+        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/practices/${id}`, token);
+        window.location = '/practices';
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   return (
     <div>
@@ -42,6 +54,8 @@ function Practice(props) {
       {practice && (
         <PracticeComponent practice={practice} />
       )}
+      <Link to={`/practices/${practice._id}/edit`}><p>Edit Practice</p></Link>
+      <button onClick={() => handleDelete(practice._id)} className="danger">Delete</button>
       </div>
       <div className="card">
         <h1>{collections.length} Collection{collections.length === 1 ? '' : 's'} (sorted by total owed now)</h1>

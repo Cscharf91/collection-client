@@ -65,6 +65,7 @@ body {
 }
 
 .primary {
+  cursor: pointer;
   background: rgb(0, 77, 165);
   padding: 10px;
   border: none;
@@ -73,7 +74,17 @@ body {
 }
 
 .secondary {
+  cursor: pointer;
   background: rgb(2, 107, 72);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.danger {
+  cursor: pointer;
+  background: rgb(153, 2, 2);
   padding: 10px;
   border: none;
   border-radius: 5px;

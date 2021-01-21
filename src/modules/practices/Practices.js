@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PracticeComponent from "./PracticeComponent";
 
 function Practices(props) {
+  const token = JSON.parse(localStorage.token);
   const [practices, setPractices] = useState([]);
   const [search, setSearch] = useState('');
   const [error, setError] = useState();
@@ -32,6 +33,19 @@ function Practices(props) {
     if (searchResult) window.location = `/practices/${searchResult._id}`;
   }
 
+  const handleDelete = async (id) => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm('Are you sure you want to delete this?')) {
+      try {
+        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/practices/${id}`, token);
+        const updatedPractices = practices.filter(practice => practice._id !== id);
+        setPractices(updatedPractices);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
   return (
     <div>
       <div className="searchbox">
@@ -46,6 +60,7 @@ function Practices(props) {
           <PracticeComponent practice={practice} />
           <Link to={`/practices/${practice._id}`}><p>View Practice/Collections</p></Link>
           <Link to={`/practices/${practice._id}/edit`}><p>Edit Practice</p></Link>
+          <button onClick={() => handleDelete(practice._id)} className="danger">Delete</button>
         </div>
       ))}
       {error && <p>{error}</p>}
