@@ -12,7 +12,7 @@ function Practice(props) {
     const getPractice = async () => {
       try {
         const { data } = await axios.get(
-          `http://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}`
+          `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}`
         );
         setPractice(data);
       } catch (err) {
@@ -22,7 +22,7 @@ function Practice(props) {
     const getPracticeCollections = async () => {
       try {
         const { data } = await axios.get(
-          `http://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}/collections`
+          `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}/collections`
         );
         const practiceCollections = data.sort((a, b) => parseInt(a.amountDue) - parseInt(a.amountPaid) < parseInt(b.amountDue) - parseInt(b.amountPaid) ? 1 : -1)
         setCollections(practiceCollections);

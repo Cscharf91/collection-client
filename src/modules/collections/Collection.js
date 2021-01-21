@@ -12,7 +12,7 @@ function Collection(props) {
     const getCollection = async () => {
       try {
         const { data } = await axios.get(
-          `http://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`
+          `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`
         );
         setCollection(data);
         data.scan ? setScan(data.scan) : setScan(null);
@@ -36,7 +36,7 @@ function Collection(props) {
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await axios.post('http://mighty-refuge-61161.herokuapp.com/api/upload', formData, config);
+        const { data } = await axios.post('https://mighty-refuge-61161.herokuapp.com/api/upload', formData, config);
         setScan(data.scan);
       } catch (err) {
         console.log(err);

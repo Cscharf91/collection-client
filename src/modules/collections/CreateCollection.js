@@ -26,7 +26,7 @@ function CreateCollection(props) {
   useEffect(() => {
     const getPractices = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/practices");
+        const { data } = await axios.get("https://mighty-refuge-61161.herokuapp.com/api/practices");
         console.log(data);
         setPractices(data);
       } catch (err) {
@@ -40,7 +40,7 @@ function CreateCollection(props) {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/collections",
+        "https://mighty-refuge-61161.herokuapp.com/api/collections",
         collection,
         token
       );
