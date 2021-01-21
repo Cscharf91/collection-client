@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './modules/NavBar';
 import { useEffect, useState } from 'react';
 import Home from './modules/Home';
-import Login from './modules/Login';
+import Login from './modules/auth/Login';
 import CreatePractice from './modules/practices/CreatePractice';
 import Practice from './modules/practices/Practice';
 import EditPractice from './modules/practices/EditPractice';
 import CreateCollection from './modules/collections/CreateCollection';
 import EditCollection from './modules/collections/EditCollection';
 import Collection from './modules/collections/Collection';
+import Practices from './modules/practices/Practices';
+import Collections from './modules/collections/Collections';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -48,6 +50,20 @@ function App() {
             setUser={setUser}
             token={token}
             setToken={setToken}
+          />
+          }
+        />
+        <Route path="/practices" exact
+          render={props => <Practices {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/collections" exact
+          render={props => <Collections {...props}
+            user={user}
+            token={token}
           />
           }
         />

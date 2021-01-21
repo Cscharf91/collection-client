@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CollectionComponent from "./CollectionComponent";
 
 function Collection(props) {
   const [collection, setCollection] = useState({});
+  const [selectedFile, setSelectedFile] = useState("");
+  const [scan, setScan] = useState(null);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -12,8 +15,8 @@ function Collection(props) {
         const { data } = await axios.get(
           `http://localhost:5000/api/collections/${props.match.params.id}`
         );
-        console.log(data.practice.name);
         setCollection(data);
+        data.scan ? setScan(data.scan) : setScan(null);
       } catch (err) {
         setError("This collection does not exist");
       }
@@ -21,28 +24,57 @@ function Collection(props) {
     getCollection();
   }, [props.match.params.id]);
 
+  const handleScanUpload = async (e) => {
+    e.preventDefault();
+    if (selectedFile) {
+      const formData = new FormData();
+  
+      formData.append("image", selectedFile);
+      formData.append("collectionId", JSON.stringify(collection._id).slice(1, -1));
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        const { data } = await axios.post('http://localhost:5000/api/upload', formData, config);
+        setScan(data.scan);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
+  const handleScanChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  }
 
   return (
     <div>
-      {error && <p>{error}</p>}
-      {collection && collection.practice && (
-        <div>
-          <p>{collection.fname}</p>
-          <p>{collection.lname}</p>
-          <p>Practice: {collection.practice.name}</p>
-          <p>{collection.amountDue}</p>
-          <p>{collection.amountPaid}</p>
-          <p>{collection.phone}</p>
-          <p>{collection.dob}</p>
-          <p>{collection.ssn}</p>
-          <p>{collection.address}</p>
-          <p>{collection.city}</p>
-          <p>{collection.state}</p>
-          <p>{collection.zip}</p>
-          <p>{collection.date}</p>
+      <div className="card-grid">
+        <div className="collection-info">
+          <h1>Collection</h1>
+          {error && <p>{error}</p>}
+          {collection && collection.practice && (
+          <CollectionComponent collection={collection} />
+          )}
         </div>
-      )}
-      <Link to={`/collections/props.match.params.id/edit`}>Edit Collection</Link>
+        <div className="collection-scan">
+          {scan && <img className="scan-img" src={scan} alt="scan" />}
+          <form onSubmit={handleScanUpload}>
+            <input
+              type="file"
+              name="scan"
+              // value={scan}
+              onChange={handleScanChange}
+            />
+            <button className="primary">Upload Scan</button>
+          </form>
+        </div>
+      </div>
+      <div className="card">
+        <h1>Notes</h1>
+      </div>
     </div>
   );
 }

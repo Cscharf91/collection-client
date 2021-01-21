@@ -46,7 +46,7 @@ function EditPractice(props) {
   };
 
   return (
-    <div>
+    <div className="card">
       {!user && <p>Must be logged in to edit a practice.</p>}
       {error && <p>{error}</p>}
       {user && practice && (

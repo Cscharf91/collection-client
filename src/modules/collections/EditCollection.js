@@ -55,7 +55,7 @@ function EditCollection(props) {
   };
 
   return (
-    <div>
+    <div className="card">
       {!user && <p>Must be logged in to create a collection.</p>}
       {error && <p>{error}</p>}
       {user && practices && collection && (

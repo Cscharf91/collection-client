@@ -3,8 +3,9 @@ import React from "react";
 function Home(props) {
   const { user } = props;
   return (
-    <div className="home">
-      {user && <p>Hi, {user.username}</p>}
+    <div className="card">
+      {user && <p>Welcome, {user.username}</p>}
+      <p>(this page is mpty for now)</p>
     </div>
   );
 }

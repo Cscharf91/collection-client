@@ -38,7 +38,7 @@ function CreatePractice(props) {
   };
 
   return (
-    <div>
+    <div className="card">
       {!user && <p>Must be logged in to create a practice.</p>}
       {user && (
         <form onSubmit={handleSubmit}>

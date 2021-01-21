@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import PracticeComponent from "./PracticeComponent";
 
 function Practice(props) {
   const [practice, setPractice] = useState({});
+  const [collections, setCollections] = useState([]);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -16,25 +19,36 @@ function Practice(props) {
         setError("This practice does not exist");
       }
     };
+    const getPracticeCollections = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/api/practices/${props.match.params.id}/collections`
+        );
+        const practiceCollections = data.sort((a, b) => parseInt(a.amountDue) - parseInt(a.amountPaid) < parseInt(b.amountDue) - parseInt(b.amountPaid) ? 1 : -1)
+        setCollections(practiceCollections);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     getPractice();
+    getPracticeCollections();
   }, [props.match.params.id]);
 
 
   return (
     <div>
-      {practice && (
-        <div>
-          <p>{practice.name}</p>
-          <p>{practice.code}</p>
-          <p>{practice.address}</p>
-          <p>{practice.city}</p>
-          <p>{practice.state}</p>
-          <p>{practice.zip}</p>
-          <p>{practice.phone}</p>
-          <p>{practice.type}</p>
-        </div>
-      )}
+      <div className="card">
       {error && <p>{error}</p>}
+      {practice && (
+        <PracticeComponent practice={practice} />
+      )}
+      </div>
+      <div className="card">
+        <h1>{collections.length} Collection{collections.length === 1 ? '' : 's'} (sorted by total owed now)</h1>
+        {collections.length > 0 && collections.map(collection => (
+          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${parseInt(collection.amountDue) - parseInt(collection.amountPaid)}`}</p></Link>
+        ))}
+      </div>
     </div>
   );
 }
