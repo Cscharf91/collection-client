@@ -1,13 +1,38 @@
 import axios from "axios";
+import { DateTime } from "luxon";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
 
 function Collection(props) {
+  const token = JSON.parse(localStorage.token);
   const [collection, setCollection] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState({ body: "", collectionId: "", reminder: "" });
   const [scan, setScan] = useState(null);
   const [error, setError] = useState();
+  
+  const handleNoteChange = (e) => {
+    setNewNote({
+      ...newNote,
+      [e.target.name]: e.target.value
+    })
+    console.log(newNote);
+  }
+
+  const handleNoteSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `https://mighty-refuge-61161.herokuapp.com/api/notes`, newNote, token
+      );
+      setNotes([data, ...notes]);
+      setNewNote({ ...newNote, body: "", reminder: "" })
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     const getCollection = async () => {
@@ -16,12 +41,28 @@ function Collection(props) {
           `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`
         );
         setCollection(data);
+        setNewNote({...newNote, collectionId: data._id})
         data.scan ? setScan(data.scan) : setScan(null);
       } catch (err) {
         setError("This collection does not exist");
       }
     };
+
+    const getNotes = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}/notes`, token
+        );
+        setNotes(data);
+        setNewNote({body: "", collectionId: collection._id, reminder: ""})
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     getCollection();
+    getNotes();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   const handleScanUpload = async (e) => {
@@ -88,6 +129,19 @@ function Collection(props) {
       </div>
       <div className="card">
         <h1>Notes</h1>
+        <form className="card" onSubmit={handleNoteSubmit}>
+          <div>
+            <label>Message:</label>
+            <input required type="text" name="body" value={newNote.body} onChange={handleNoteChange} />
+          </div>
+          <button type="submit" className="primary">Submit</button>
+        </form>
+        {notes.map(note => (
+          <div className="card" key={note._id}>
+            <p><strong>Created:</strong> {DateTime.fromISO(note.date).toLocaleString()}</p>
+            <p>{note.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
