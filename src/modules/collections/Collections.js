@@ -12,7 +12,7 @@ function Collections(props) {
     const getCollections = async () => {
       try {
         const { data } = await axios.get(
-          'http://localhost:5000/api/collections/'
+          'https://mighty-refuge-61161.herokuapp.com/api/collections/'
         );
         console.log(data);
         setCollections(data);
