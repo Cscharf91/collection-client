@@ -25,7 +25,7 @@ function Practice(props) {
         const { data } = await axios.get(
           `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}/collections`
         );
-        const practiceCollections = data.sort((a, b) => parseInt(a.amountDue) - parseInt(a.amountPaid) < parseInt(b.amountDue) - parseInt(b.amountPaid) ? 1 : -1)
+        const practiceCollections = data.sort((a, b) => parseFloat(a.amountDue) - parseFloat(a.amountPaid) < parseFloat(b.amountDue) - parseFloat(b.amountPaid) ? 1 : -1)
         setCollections(practiceCollections);
       } catch (err) {
         console.log(err);
