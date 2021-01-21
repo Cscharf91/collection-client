@@ -11,6 +11,7 @@ function CreateCollection(props) {
     fname: "",
     lname: "",
     practice: "",
+    accountNumber: "",
     amountDue: "",
     amountPaid: "",
     dob: "",
@@ -93,6 +94,13 @@ function CreateCollection(props) {
               ))}
             </select>
           </div>
+          <FormComponent
+            name={"accountNumber"}
+            object={collection}
+            type={"text"}
+            required={true}
+            handleChange={handleChange}
+          />
           <FormComponent
             name={"amountDue"}
             object={collection}

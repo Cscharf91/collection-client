@@ -91,6 +91,13 @@ function EditCollection(props) {
             </select>
           </div>
           <FormComponent
+            name={"accountNumber"}
+            object={collection}
+            type={"text"}
+            required={true}
+            handleChange={handleChange}
+          />
+          <FormComponent
             name={"amountDue"}
             object={collection}
             type={"number"}

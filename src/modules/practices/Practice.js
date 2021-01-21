@@ -60,7 +60,7 @@ function Practice(props) {
       <div className="card">
         <h1>{collections.length} Collection{collections.length === 1 ? '' : 's'} (sorted by total owed now)</h1>
         {collections.length > 0 && collections.map(collection => (
-          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${parseInt(collection.amountDue) - parseInt(collection.amountPaid)}`}</p></Link>
+          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${(parseInt(collection.amountDue) - parseInt(collection.amountPaid)).toFixed(2)}`}</p></Link>
         ))}
       </div>
     </div>
