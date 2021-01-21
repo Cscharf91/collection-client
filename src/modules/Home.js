@@ -5,7 +5,7 @@ function Home(props) {
   return (
     <div className="card">
       {user && <p>Welcome, {user.username}</p>}
-      <p>(this page is mpty for now)</p>
+      <p>(this page is empty for now)</p>
     </div>
   );
 }

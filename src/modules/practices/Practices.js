@@ -12,7 +12,7 @@ function Practices(props) {
     const getPractices = async () => {
       try {
         const { data } = await axios.get(
-          'http://localhost:5000/api/practices/'
+          'http://mighty-refuge-61161.herokuapp.com/api/practices/'
         );
         setPractices(data);
       } catch (err) {

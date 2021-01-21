@@ -3,12 +3,12 @@ import Axios from 'axios';
 
 function Login(props) {
   const [login, setLogin] = useState({ email: "", password: "" });
-  const { user, setUser, token, setToken } = props;
+  const { user, setUser, setToken } = props;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post('http://localhost:5000/api/auth/login', login);
+      const { data } = await Axios.post('http://mighty-refuge-61161.herokuapp.com/api/auth/login', login);
       const token = {
         headers: {
           'auth-token': data.token
@@ -32,22 +32,28 @@ function Login(props) {
   }
 
   return (
-  <div className="login">
+  <div className="card">
       {!user &&
       <form onSubmit={handleSubmit}>
-      <input 
-        name="email"
-        type="text"
-        value={login.email}
-        onChange={handleChange}
-      />
-      <input 
-        name="password"
-        type="password"
-        value={login.password}
-        onChange={handleChange}
-      />
-      <button type="submit">Submit</button>
+        <div>
+          <label>Email:</label>
+          <input 
+            name="email"
+            type="text"
+            value={login.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input 
+            name="password"
+            type="password"
+            value={login.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">Submit</button>
     </form>}
     {user &&
     <p>You are already logged in.</p>
