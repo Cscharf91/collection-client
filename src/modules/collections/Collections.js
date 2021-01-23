@@ -66,7 +66,7 @@ function Collections(props) {
             <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
           </div>
           <div className="collection-scan">
-            {collection.scan && <a href={collection.scan}><img className="scan-img" src={scanPic} alt="scan" /></a>}
+            {collection.scan && <a href={collection.scan} target="_blank" rel="noreferrer"><img className="scan-img" src={scanPic} alt="scan" /></a>}
           </div>
         </div>
       ))}

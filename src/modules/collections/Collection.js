@@ -116,7 +116,7 @@ function Collection(props) {
           <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
         </div>
         <div className="collection-scan">
-          {scan && <a href={scan}><img className="scan-img" src={scanPic} alt="scan" /></a>}
+          {scan && <a href={scan} target="_blank" rel="noreferrer"><img className="scan-img" src={scanPic} alt="scan" /></a>}
           <form onSubmit={handleScanUpload}>
             <input
               type="file"
