@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
+import scanPic from '../../images/scan.jpg';
 
 function Collection(props) {
   const token = JSON.parse(localStorage.token);
@@ -115,7 +116,7 @@ function Collection(props) {
           <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
         </div>
         <div className="collection-scan">
-          {scan && <img className="scan-img" src={scan} alt="scan" />}
+          {scan && <a href={scan}><img className="scan-img" src={scanPic} alt="scan" /></a>}
           <form onSubmit={handleScanUpload}>
             <input
               type="file"

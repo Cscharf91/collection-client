@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
+import scanPic from '../../images/scan.jpg';
 
 function Collections(props) {
   const token = JSON.parse(localStorage.token);
@@ -65,7 +66,7 @@ function Collections(props) {
             <button onClick={() => handleDelete(collection._id)} className="danger">Delete</button>
           </div>
           <div className="collection-scan">
-            {collection.scan && <img className="scan-img" src={collection.scan} alt="scan" />}
+            {collection.scan && <a href={collection.scan}><img className="scan-img" src={scanPic} alt="scan" /></a>}
           </div>
         </div>
       ))}

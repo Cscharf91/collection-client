@@ -7,7 +7,7 @@ function CollectionComponent(props) {
     <div>
       {collection.fname && <p><strong>First Name:</strong> {collection.fname}</p>}
       {collection.lname && <p><strong>Last Name:</strong> {collection.lname}</p>}
-      {collection.accountNumber && <p><strong>Account Number:</strong> ${collection.accountNumber}</p>}
+      {collection.accountNumber && <p><strong>Account Number:</strong> {collection.accountNumber}</p>}
       {collection.practice.name && <p><strong>Practice Name:</strong> {collection.practice.name}</p>}
       {collection.amountDue && collection.amountPaid && <p><strong>Remaining Balance:</strong> ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>}
       {collection.amountDue && <p><strong>Total Due:</strong> ${collection.amountDue}</p>}
