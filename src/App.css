@@ -4,11 +4,9 @@ body {
 }
 
 .navbar {
-  padding: 30px;
+  padding: 10px;
   text-align: center;
   background: #f7f7f7;
-  display: grid;
-  /* grid-template-columns: repeat(6, 1fr); */
 }
 
 .navbar h1 {
@@ -16,15 +14,22 @@ body {
 }
 
 .nav-links button {
-  width: 100%;
+  width: 50%;
   border: 1px solid;
   padding: 10px;
   cursor: pointer;
+  background: #f7f7f7;
+  color: #5c5c5c;
+  border: none;
+  font-size: 24px;
 }
 
 .nav-links {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  opacity: 1;
+  max-height: auto;
+  grid-template-columns: 1fr;
+  transition: 0.5s;
 }
 
 .scan-img {
@@ -103,4 +108,16 @@ body {
 
 .searchbox input {
   margin-right: 10px;
+}
+
+.hidden {
+  max-height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear, max-height 0.15s ease-out;
+}
+
+.menu-selected svg {
+  color: rgb(80, 2, 2);
 }

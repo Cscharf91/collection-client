@@ -7,10 +7,11 @@ function CreateCollection(props) {
   const token = JSON.parse(localStorage.token);
   const [error, setError] = useState(false);
   const [practices, setPractices] = useState([]);
+  const currentPractice = props.location.currentPractice || "";
   const [collection, setCollection] = useState({
     fname: "",
     lname: "",
-    practice: "",
+    practice: currentPractice,
     accountNumber: "",
     amountDue: "",
     amountPaid: "",

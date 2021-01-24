@@ -1,49 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MenuIcon from '@material-ui/icons/Menu';
 
 function NavBar(props) {
   const { user, logOut } = props;
+  const [navToggle, setNavToggle] = useState("hidden");
+
+  const handleMenuToggle = () => {
+    navToggle === "hidden" ? setNavToggle("") : setNavToggle("hidden");
+  }
 
   return (
-    <nav className="navbar">
+    <nav className={navToggle !== "hidden" ? "navbar menu-selected" : "navbar"}>
       <h1>RJS Billing</h1>
-      <div className="nav-links">
-        <Link to="/">
-            <button className="primary">Home</button>
+      <h1>
+        <MenuIcon fontSize="large" onClick={handleMenuToggle} />
+      </h1>
+      <div className={`nav-links ${navToggle}`}>
+        <Link onClick={() => setNavToggle('hidden')} to="/">
+            <button>Home</button>
         </Link>
         {user && (
-          <Link to="#">
-            <button className="primary" onClick={logOut}>Log Out</button>
+          <Link onClick={() => setNavToggle('hidden')} to="#">
+            <button onClick={logOut}>Log Out</button>
           </Link>
         )}
         {!user && (
-          <Link to="/login">
-            <button className="primary">Log In</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/login">
+            <button>Log In</button>
           </Link>
         )}
         {!user && (
-          <Link to="/signup">
-            <button className="primary">Sign Up</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/signup">
+            <button>Sign Up</button>
           </Link>
         )}
         {user && (
-          <Link to="/practices/create">
-            <button className="primary">Create Practice</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/practices/create">
+            <button>Create Practice</button>
           </Link>
         )}
         {user && (
-          <Link to="/collections/create">
-            <button className="primary">Create Collection</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/collections/create">
+            <button>Create Collection</button>
           </Link>
         )}
         {user && (
-          <Link to="/practices">
-            <button className="primary">View Practices</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/practices">
+            <button>View Practices</button>
           </Link>
         )}
         {user && (
-          <Link to="/collections">
-            <button className="primary">View Collections</button>
+          <Link onClick={() => setNavToggle('hidden')} to="/collections">
+            <button>View Collections</button>
           </Link>
         )}
       </div>

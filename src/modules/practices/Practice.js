@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PracticeComponent from "./PracticeComponent";
+import { DateTime } from 'luxon';
 
 function Practice(props) {
   const token = JSON.parse(localStorage.token);
   const [practice, setPractice] = useState({});
   const [collections, setCollections] = useState([]);
+  const [filteredCollections, setFilteredCollections] = useState([]);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -25,8 +27,8 @@ function Practice(props) {
         const { data } = await axios.get(
           `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}/collections`
         );
-        const practiceCollections = data.sort((a, b) => parseFloat(a.amountDue) - parseFloat(a.amountPaid) < parseFloat(b.amountDue) - parseFloat(b.amountPaid) ? 1 : -1)
-        setCollections(practiceCollections);
+        setCollections(data);
+        setFilteredCollections(data);
       } catch (err) {
         console.log(err);
       }
@@ -47,6 +49,21 @@ function Practice(props) {
     }
   }
 
+  const handleFilterSelect = (e) => {
+    if (collections && e.target.value === 'newest') {
+      setFilteredCollections(collections);
+    } else if (collections && e.target.value === 'moneyDue') {
+      const practiceCollections = [...collections].sort((a, b) => parseFloat(a.amountDue) - parseFloat(a.amountPaid) < parseFloat(b.amountDue) - parseFloat(b.amountPaid) ? 1 : -1);
+      setFilteredCollections(practiceCollections);
+    } else if (collections && e.target.value === 'oldest') {
+      const practiceCollections = [...collections].sort((a, b) => a.date > b.date ? 1 : -1);
+      setFilteredCollections(practiceCollections);
+    } else if (collections && e.target.value === 'lname') {
+      const practiceCollections = [...collections].sort((a, b) => a.lname > b.lname ? 1 : -1);
+      setFilteredCollections(practiceCollections);
+    }
+  }
+
   return (
     <div>
       <div className="card">
@@ -54,13 +71,25 @@ function Practice(props) {
       {practice && (
         <PracticeComponent practice={practice} />
       )}
+      <Link to={{
+        pathname: `/collections/create`,
+        currentPractice: practice._id
+      }}><p>Create Collections</p></Link>
       <Link to={`/practices/${practice._id}/edit`}><p>Edit Practice</p></Link>
       <button onClick={() => handleDelete(practice._id)} className="danger">Delete</button>
       </div>
       <div className="card">
-        <h1>{collections.length} Collection{collections.length === 1 ? '' : 's'} (sorted by total owed now)</h1>
-        {collections.length > 0 && collections.map(collection => (
-          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${(parseInt(collection.amountDue) - parseInt(collection.amountPaid)).toFixed(2)}`}</p></Link>
+        <h1>{collections.length} Collection{collections.length === 1 ? '' : 's'}</h1>
+        <p>Sort By:</p>
+        <select onChange={(handleFilterSelect)} >
+          <option value="newest">Newest to Oldest</option>
+          <option value="oldest">Oldest to Newest</option>
+          <option value="moneyDue">Amount Owed</option>
+          <option value="lname">Alphabetical (last name)</option>
+        </select>
+        {filteredCollections.length > 0 && filteredCollections.map(collection => (
+          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${(parseInt(collection.amountDue) - parseInt(collection.amountPaid)).toFixed(2)}`} | {DateTime.fromISO(collection.date).toLocaleString()}</p>
+          </Link>
         ))}
       </div>
     </div>
