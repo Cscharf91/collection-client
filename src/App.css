@@ -158,8 +158,13 @@ body {
   margin-bottom: 5px;
 }
 
+.right-header {
+  font-size: 16px;
+  align-self: end;
+}
+
 .papaya {
-  width: 30%;
+  width: 45%;
   margin-bottom: 5px;
 }
 

@@ -30,7 +30,6 @@ function Invoice(props) {
           <div className="invoice-header">
             <div className="left-header">
               <h2>RJS Billing LLC.</h2>
-              <h1>COLLECTION NOTICE</h1>
               <p>A Professional Debt Collection Agency</p>
               <p>P.O Box 1778</p>
               <p>New City, New York 10956</p>
@@ -41,6 +40,7 @@ function Invoice(props) {
               <p>Amount Due: ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>
             </div>
             <div className="right-header">
+              <h1>COLLECTION NOTICE</h1>
               <p>{collection.fname} {collection.lname}</p>
               {collection.address && <p>{collection.address}</p>}
               {collection.address2 && <p>{collection.address2}</p>}
