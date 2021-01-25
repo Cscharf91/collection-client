@@ -87,7 +87,7 @@ function Invoice(props) {
             <p>
               (845) 219-5443
             </p>
-            <p className="letter-bottom">PLEASE PAY THIS AMOUNT</p>
+            <p className="letter-bottom">PLEASE PAY THIS AMOUNT: ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>
           </div>
         </div>
       }
