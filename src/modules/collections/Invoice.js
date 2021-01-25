@@ -49,7 +49,7 @@ function Invoice(props) {
           </div>
 
           <div className="letter">
-            <p className="aside">Search “Papaya Payments” in the app store or go to www.papaya.com/rjsbilling</p>
+            <p className="aside">Search “Papaya Payments” in the app store or go to www.ppaya.com/rjsbilling</p>
             <img className="papaya" src={papayaPic} alt="papaya payment" />
             <p>Dear patient of {collection.practice.name},</p>
             <p>
