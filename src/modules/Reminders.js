@@ -35,9 +35,6 @@ function Reminders(props) {
           ))}
         </div>
       }
-      {!user &&
-        <h1>Please log in to view collections, practices, and notifications.</h1>
-      }
     </div>
   )
 }

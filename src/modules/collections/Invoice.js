@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import papayaPic from '../../images/papayaPic.png';
 
 function Invoice(props) {
-  const [collection, setCollection] = useState({});
+  const [collection, setCollection] = useState();
 
   useEffect(() => {
     //Remove navbar for invoice

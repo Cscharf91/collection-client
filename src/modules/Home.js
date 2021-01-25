@@ -8,6 +8,9 @@ function Home(props) {
       {user && 
         <Reminders />
       }
+      {!user &&
+        <h1>Please log in to view collections, practices, and notifications.</h1>
+      }
     </div>
   );
 }
