@@ -153,7 +153,7 @@ body {
 .invoice-header {
   font-size: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 5fr;
   align-items: center;
   margin-bottom: 5px;
 }
@@ -173,6 +173,15 @@ body {
   margin-top: 42px;
   font-size: 10px;
   font-style: italic;
+}
+
+.letter-bottom {
+  background: black;
+  color: white;
+  text-align: center;
+  font-weight: bolder;
+  width: 30%;
+  margin: auto;
 }
 
 @media(max-width: 1500px) {

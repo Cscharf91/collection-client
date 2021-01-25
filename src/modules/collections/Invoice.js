@@ -35,7 +35,7 @@ function Invoice(props) {
               <p>New City, New York 10956</p>
               <p>(845) 219-5443</p>
               <p>LICENSE NUMBER: 2097549-DCA</p>
-              <p>Account Number: {collection.accountNumber}</p>
+              <p>Account Number: {collection.practice.code}{collection.accountNumber}</p>
               <p>{DateTime.local().toLocaleString()}</p>
               <p>Amount Due: ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>
             </div>
@@ -87,6 +87,7 @@ function Invoice(props) {
             <p>
               (845) 219-5443
             </p>
+            <p className="letter-bottom">PLEASE PAY THIS AMOUNT</p>
           </div>
         </div>
       }
