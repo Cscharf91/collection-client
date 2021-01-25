@@ -170,6 +170,7 @@ body {
 }
 
 .aside {
+  margin-top: 42px;
   font-size: 10px;
   font-style: italic;
 }
