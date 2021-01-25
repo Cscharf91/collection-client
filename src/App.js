@@ -12,6 +12,7 @@ import EditCollection from './modules/collections/EditCollection';
 import Collection from './modules/collections/Collection';
 import Practices from './modules/practices/Practices';
 import Collections from './modules/collections/Collections';
+import Invoice from './modules/collections/Invoice';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -104,6 +105,13 @@ function App() {
         />
         <Route path="/collections/:id/edit" exact
           render={props => <EditCollection {...props}
+            user={user}
+            token={token}
+          />
+          }
+        />
+        <Route path="/collections/:id/invoice" exact
+          render={props => <Invoice {...props}
             user={user}
             token={token}
           />

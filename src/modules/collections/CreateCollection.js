@@ -18,6 +18,7 @@ function CreateCollection(props) {
     dob: "",
     ssn: "",
     address: "",
+    address2: "",
     city: "",
     state: "",
     zip: "",
@@ -129,6 +130,12 @@ function CreateCollection(props) {
           />
           <FormComponent
             name={"address"}
+            object={collection}
+            type={"text"}
+            handleChange={handleChange}
+          />
+          <FormComponent
+            name={"address2"}
             object={collection}
             type={"text"}
             handleChange={handleChange}

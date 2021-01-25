@@ -143,3 +143,26 @@ body {
 .menu-selected svg {
   color: rgb(80, 2, 2);
 }
+
+.invoice {
+  font-size: 18px;
+  width: 55%;
+  margin: 50px auto;
+}
+
+.invoice-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.papaya {
+  width: 70%;
+  margin-bottom: 40px;
+}
+
+.aside {
+  font-size: 14px;
+  font-style: italic;
+}
