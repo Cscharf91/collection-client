@@ -167,3 +167,13 @@ body {
   font-size: 14px;
   font-style: italic;
 }
+
+@media(max-width: 1500px) {
+  .card, .card-grid, .searchbox {
+    width: 70%;
+  }
+  
+  .card-grid {
+    display: block;
+  }
+}
