@@ -5,7 +5,9 @@ function Home(props) {
   const { user } = props;
   return (
     <div className="card">
-      <Reminders />
+      {user && 
+        <Reminders />
+      }
     </div>
   );
 }
