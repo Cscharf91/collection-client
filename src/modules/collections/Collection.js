@@ -18,13 +18,13 @@ function Collection(props) {
     setNewNote({
       ...newNote,
       [e.target.name]: e.target.value
-    })
-    console.log(newNote);
+    });
   }
 
   const handleNoteSubmit = async (e) => {
     e.preventDefault();
     try {
+      setNewNote({...newNote, collectionId: collection._id});
       const { data } = await axios.post(
         `https://mighty-refuge-61161.herokuapp.com/api/notes`, newNote, token
       );
@@ -55,7 +55,6 @@ function Collection(props) {
           `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}/notes`, token
         );
         setNotes(data);
-        setNewNote({body: "", collectionId: collection._id, reminder: ""})
       } catch (err) {
         console.log(err);
       }
@@ -134,12 +133,15 @@ function Collection(props) {
           <div>
             <label>Message:</label>
             <input required type="text" name="body" value={newNote.body} onChange={handleNoteChange} />
+            <label>Reminder Date (optional)</label>
+            <input type="date" name="reminder" value={newNote.reminder} onChange={handleNoteChange} />
           </div>
           <button type="submit" className="primary">Submit</button>
         </form>
         {notes.map(note => (
           <div className="card" key={note._id}>
             <p><strong>Created:</strong> {DateTime.fromISO(note.date).toLocaleString()}</p>
+            {note.reminder && <p><strong>Reminder:</strong> {DateTime.fromISO(note.reminder).toLocaleString()}</p>}
             <p>{note.body}</p>
           </div>
         ))}

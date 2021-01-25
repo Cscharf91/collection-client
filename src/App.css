@@ -46,6 +46,15 @@ body {
   grid-column: 2;
 }
 
+.card-2 {
+  width: 40%;
+  margin: 10px auto;
+  background: #fff;
+  border-radius: 6px;
+  padding: 30px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
 .card label {
   margin-right: 10px;
 }
@@ -65,6 +74,19 @@ body {
   grid-column: 2;  
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-grid-2 {
+  width: 40%;
+  margin: 10px auto;
+  background: #fff;
+  border-radius: 6px;
+  padding: 30px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+  display: grid;
+  grid-template-columns: repeat(auto, 1fr);
   align-items: center;
   justify-content: center;
 }
