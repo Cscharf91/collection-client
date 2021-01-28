@@ -44,7 +44,7 @@ function Invoice(props) {
               <p>{collection.fname} {collection.lname}</p>
               {collection.address && <p>{collection.address}</p>}
               {collection.address2 && <p>{collection.address2}</p>}
-              {collection.city && collection.state && collection.zip && <p>{`${collection.city}, ${collection.state}, ${collection.zip}`}</p>}
+              {collection.city && collection.state && collection.zip && <p>{`${collection.city}, ${collection.state} ${collection.zip}`}</p>}
             </div>
           </div>
 
