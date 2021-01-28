@@ -139,7 +139,7 @@ function CreateCollection(props) {
             type={"number"}
             handleChange={handleChange}
           />
-          <FormComponent
+          {/* <FormComponent
             name={"dob"}
             object={collection}
             type={"date"}
@@ -150,7 +150,7 @@ function CreateCollection(props) {
             object={collection}
             type={"text"}
             handleChange={handleChange}
-          />
+          /> */}
           <FormComponent
             name={"address"}
             object={collection}

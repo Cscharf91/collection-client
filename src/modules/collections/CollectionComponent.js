@@ -15,8 +15,8 @@ function CollectionComponent(props) {
       {collection.amountDue && <p><strong>Total Due:</strong> ${collection.amountDue}</p>}
       {collection.amountPaid && <p><strong>Amount Paid:</strong> ${collection.amountPaid}</p>}
       {collection.phone && <p><strong>Phone:</strong> {collection.phone}</p>}
-      {collection.dob && <p><strong>Date of Birth:</strong> {collection.dob}</p>}
-      {collection.ssn && <p><strong>SSN:</strong> {collection.ssn}</p>}
+      {/* {collection.dob && <p><strong>Date of Birth:</strong> {collection.dob}</p>} */}
+      {/* {collection.ssn && <p><strong>SSN:</strong> {collection.ssn}</p>} */}
       {collection.address && <p><strong>Address:</strong> {collection.address}</p>}
       {collection.address2 && <p><strong>Address Line 2:</strong> {collection.address2}</p>}
       {collection.city && <p><strong>City:</strong> {collection.city}</p>}
