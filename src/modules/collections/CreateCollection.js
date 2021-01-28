@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import FormComponent from "../FormComponent";
+import { Link } from "react-router-dom";
 
 function CreateCollection(props) {
   const user = JSON.parse(localStorage.user);
   const token = JSON.parse(localStorage.token);
+  const [flashMsg, setFlashMsg] = useState("")
   const [error, setError] = useState(false);
   const [practices, setPractices] = useState([]);
   const currentPractice = props.location.currentPractice || "";
+  const [addedCollections, setAddedCollections] = useState([])
   const [collection, setCollection] = useState({
     fname: "",
     lname: "",
@@ -47,7 +50,24 @@ function CreateCollection(props) {
         collection,
         token
       );
-      window.location = `/collections/${data._id}`;
+      setCollection({
+        fname: "",
+        lname: "",
+        accountNumber: "",
+        amountDue: "",
+        amountPaid: "",
+        dob: "",
+        ssn: "",
+        address: "",
+        address2: "",
+        city: "",
+        state: "",
+        zip: "",
+        phone: "",
+        selectedFile: "",
+      })
+      setFlashMsg(`Successfully added collection for ${data.fname} ${data.lname}!`)
+      setAddedCollections([data, ...addedCollections])
     } catch (err) {
       console.log(err);
     }
@@ -62,6 +82,7 @@ function CreateCollection(props) {
 
   return (
     <div className="card">
+      <p className="success">{flashMsg}</p>
       {!user && <p>Must be logged in to create a collection.</p>}
       {error && <p>{error}</p>}
       {user && practices && (
@@ -167,6 +188,14 @@ function CreateCollection(props) {
           <button type="submit">Submit</button>
         </form>
       )}
+      {addedCollections.length > 0 &&
+        <div className="card">
+          <h1>Recently Added:</h1>
+          {addedCollections.map(collection => (
+            <Link id={collection._id} to={`/collections/${collection._id}`}><p>{collection.fname} {collection.lname}</p></Link>
+          ))}
+        </div>
+      }
     </div>
   );
 }

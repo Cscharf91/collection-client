@@ -185,6 +185,10 @@ body {
   margin: auto;
 }
 
+.success {
+  color: green;
+}
+
 @media(max-width: 1500px) {
   .card, .card-grid, .searchbox {
     width: 70%;
