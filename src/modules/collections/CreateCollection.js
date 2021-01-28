@@ -44,6 +44,7 @@ function CreateCollection(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(collection);
     try {
       const { data } = await axios.post(
         "https://mighty-refuge-61161.herokuapp.com/api/collections",
@@ -51,6 +52,7 @@ function CreateCollection(props) {
         token
       );
       setCollection({
+        ...collection,
         fname: "",
         lname: "",
         accountNumber: "",
@@ -192,7 +194,7 @@ function CreateCollection(props) {
         <div className="card">
           <h1>Recently Added:</h1>
           {addedCollections.map(collection => (
-            <Link id={collection._id} to={`/collections/${collection._id}`}><p>{collection.fname} {collection.lname}</p></Link>
+            <Link key={collection._id} to={`/collections/${collection._id}`}><p>{collection.fname} {collection.lname}</p></Link>
           ))}
         </div>
       }
