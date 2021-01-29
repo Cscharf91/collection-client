@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CollectionComponent from "./CollectionComponent";
 import scanPic from '../../images/scan.jpg';
 
@@ -8,7 +8,10 @@ function Collections(props) {
   const token = JSON.parse(localStorage.token);
   const [collections, setCollections] = useState([]);
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [filterType, setFilterType] = useState('last name');
   const [error, setError] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     const getCollections = async () => {
@@ -16,10 +19,11 @@ function Collections(props) {
         const { data } = await axios.get(
           'https://mighty-refuge-61161.herokuapp.com/api/collections/'
         );
-        console.log(data);
+        setIsLoading(false);
         setCollections(data);
       } catch (err) {
         setError("There are no collections. Please create one and then reload this page.");
+        setIsLoading(false);
       }
     };
     getCollections();
@@ -31,8 +35,18 @@ function Collections(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const [searchResult] = collections.filter(collection => collection.lname.toUpperCase() === search.toUpperCase());
-    if (searchResult) window.location = `/collections/${searchResult._id}`;
+    let searchResults;
+    switch(filterType) {
+      case 'last name':
+        searchResults = collections.filter(collection => collection.lname.toUpperCase() === search.toUpperCase());
+        break;
+      case 'account number':
+        searchResults = collections.filter(collection => collection.accountNumber === search);
+        break;
+      default:
+        console.log(filterType);
+    }
+    if (searchResults) history.push(`/collections/${searchResults[0]._id}`);
   }
 
   const handleDelete = async (id) => {
@@ -51,12 +65,17 @@ function Collections(props) {
   return (
     <div>
       <div className="searchbox">
-        <h3>Search Collections by Last Name:</h3>
+        <h3>Search Collections by:</h3>
+        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+          <option value="last name">Last Name</option>
+          <option value="account number">Account Number</option>
+        </select>
         <form onSubmit={handleSubmit}>
           <input name="code" type="text" onChange={handleChange} value={search}/>
           <button className="primary" type="submit">Submit</button>
         </form>
       </div>
+      {isLoading && <div className="card"><h3>Loading...</h3></div>}
       {collections.map(collection => (
         <div className="card-grid">
           <div className="collection-info">

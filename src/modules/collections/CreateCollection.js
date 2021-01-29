@@ -136,6 +136,8 @@ function CreateCollection(props) {
           <FormComponent
             name={"amountPaid"}
             object={collection}
+            default="0"
+            required={true}
             type={"number"}
             handleChange={handleChange}
           />

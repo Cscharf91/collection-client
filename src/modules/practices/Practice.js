@@ -9,6 +9,7 @@ function Practice(props) {
   const [practice, setPractice] = useState({});
   const [collections, setCollections] = useState([]);
   const [filteredCollections, setFilteredCollections] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,8 +19,10 @@ function Practice(props) {
           `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}`
         );
         setPractice(data);
+        setIsLoading(false);
       } catch (err) {
         setError("This practice does not exist");
+        setIsLoading(false);
       }
     };
     const getPracticeCollections = async () => {
@@ -68,6 +71,7 @@ function Practice(props) {
     <div>
       <div className="card">
       {error && <p>{error}</p>}
+      {isLoading && <h3>Loading...</h3>}
       {practice && (
         <PracticeComponent practice={practice} />
       )}

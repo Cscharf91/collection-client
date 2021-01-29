@@ -10,6 +10,7 @@ function Collection(props) {
   const [collection, setCollection] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [newNote, setNewNote] = useState({ body: "", collectionId: "", reminder: "" });
   const [scan, setScan] = useState(null);
   const [error, setError] = useState();
@@ -44,8 +45,10 @@ function Collection(props) {
         setCollection(data);
         setNewNote({...newNote, collectionId: data._id})
         data.scan ? setScan(data.scan) : setScan(null);
+        setIsLoading(false);
       } catch (err) {
         setError("This collection does not exist");
+        setIsLoading(false);
       }
     };
 
@@ -108,6 +111,7 @@ function Collection(props) {
         <div className="collection-info">
           <h1>Collection</h1>
           {error && <p>{error}</p>}
+          {isLoading && <h3>Loading...</h3>}
           {collection && collection.practice && (
           <CollectionComponent collection={collection} />
           )}

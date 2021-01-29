@@ -7,6 +7,7 @@ function Practices(props) {
   const token = JSON.parse(localStorage.token);
   const [practices, setPractices] = useState([]);
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -16,8 +17,10 @@ function Practices(props) {
           'https://mighty-refuge-61161.herokuapp.com/api/practices/'
         );
         setPractices(data);
+        setIsLoading(false);
       } catch (err) {
         setError("There are no practices. Please create one and then reload this page.");
+        setIsLoading(false);
       }
     };
     getPractices();
@@ -55,6 +58,7 @@ function Practices(props) {
           <button className="primary" type="submit">Submit</button>
         </form>
       </div>
+      {isLoading && <div className="card"><h3>Loading...</h3></div>}
       {practices.map(practice => (
         <div className="card">
           <PracticeComponent practice={practice} />
