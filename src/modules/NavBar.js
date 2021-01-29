@@ -7,13 +7,19 @@ function NavBar(props) {
   const [navToggle, setNavToggle] = useState("hidden");
 
   const handleMenuToggle = () => {
-    navToggle === "hidden" ? setNavToggle("") : setNavToggle("hidden");
+    const navDom = document.querySelector('.nav-links');
+    if (navToggle === "hidden") {
+      setNavToggle("");
+      navDom.style.maxHeight = "10000px";
+    } else {
+      setNavToggle("hidden");
+      navDom.style.maxHeight = "0";
+    }
   }
 
   return (
     <nav className={navToggle !== "hidden" ? "navbar menu-selected" : "navbar"}>
-      <h1>RJS Billing</h1>
-      <h1>
+      <h1>RJS Billing <br/>
         <MenuIcon fontSize="large" onClick={handleMenuToggle} />
       </h1>
       <div className={`nav-links ${navToggle}`}>
@@ -27,14 +33,14 @@ function NavBar(props) {
         )}
         {!user && (
           <Link onClick={() => setNavToggle('hidden')} to="/login">
-            <button>Log In</button>
+            <button>Employee Log In</button>
           </Link>
         )}
-        {!user && (
+        {/* {!user && (
           <Link onClick={() => setNavToggle('hidden')} to="/signup">
             <button>Sign Up</button>
           </Link>
-        )}
+        )} */}
         {user && (
           <Link onClick={() => setNavToggle('hidden')} to="/practices/create">
             <button>Create Practice</button>

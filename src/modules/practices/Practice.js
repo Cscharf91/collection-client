@@ -92,7 +92,7 @@ function Practice(props) {
           <option value="lname">Alphabetical (last name)</option>
         </select>
         {filteredCollections.length > 0 && filteredCollections.map(collection => (
-          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${(parseInt(collection.amountDue) - parseInt(collection.amountPaid)).toFixed(2)}`} | {DateTime.fromISO(collection.date).toLocaleString()}</p>
+          <Link key={collection._id} to={`/collections/${collection._id}`}><p>{`${collection.fname} ${collection.lname}: $${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}`} | {DateTime.fromISO(collection.date).toLocaleString()}</p>
           </Link>
         ))}
       </div>
