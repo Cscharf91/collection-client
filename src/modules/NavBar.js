@@ -19,7 +19,7 @@ function NavBar(props) {
 
   return (
     <nav className={navToggle !== "hidden" ? "navbar menu-selected" : "navbar"}>
-      <h1>RJS Billing <br/>
+      <h1>Demo Billing <br/>
         <MenuIcon fontSize="large" onClick={handleMenuToggle} />
       </h1>
       <div className={`nav-links ${navToggle}`}>

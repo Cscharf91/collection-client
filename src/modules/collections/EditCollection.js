@@ -22,7 +22,9 @@ function EditCollection(props) {
     };
     const getPractices = async () => {
       try {
-        const { data } = await axios.get("https://mighty-refuge-61161.herokuapp.com/api/practices");
+        const { data } = await axios.get(
+          "https://mighty-refuge-61161.herokuapp.com/api/practices"
+        );
         setPractices(data);
       } catch (err) {
         setError("Please create a practice before creating a collection.");
