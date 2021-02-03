@@ -12,7 +12,7 @@ function EditPractice(props) {
     const getPractice = async () => {
       try {
         const { data } = await axios.get(
-          `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}`
+          `/api/practices/${props.match.params.id}`
         );
         setPractice(data);
       } catch (err) {
@@ -27,7 +27,7 @@ function EditPractice(props) {
     e.preventDefault();
     try {
       const data = await axios.patch(
-        `https://mighty-refuge-61161.herokuapp.com/api/practices/${props.match.params.id}`,
+        `/api/practices/${props.match.params.id}`,
         practice,
         token
       );

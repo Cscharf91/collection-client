@@ -8,7 +8,7 @@ function Login(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post('https://mighty-refuge-61161.herokuapp.com/api/auth/login', login);
+      const { data } = await Axios.post('/api/auth/login', login);
       const token = {
         headers: {
           'auth-token': data.token

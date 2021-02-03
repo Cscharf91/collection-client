@@ -27,7 +27,7 @@ function Collection(props) {
     try {
       setNewNote({...newNote, collectionId: collection._id});
       const { data } = await axios.post(
-        `https://mighty-refuge-61161.herokuapp.com/api/notes`, newNote, token
+        `/api/notes`, newNote, token
       );
       setNotes([data, ...notes]);
       setNewNote({ ...newNote, body: "", reminder: "" })
@@ -40,7 +40,7 @@ function Collection(props) {
     const getCollection = async () => {
       try {
         const { data } = await axios.get(
-          `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`
+          `/api/collections/${props.match.params.id}`
         );
         setCollection(data);
         setNewNote({...newNote, collectionId: data._id})
@@ -55,7 +55,7 @@ function Collection(props) {
     const getNotes = async () => {
       try {
         const { data } = await axios.get(
-          `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}/notes`, token
+          `/api/collections/${props.match.params.id}/notes`, token
         );
         setNotes(data);
       } catch (err) {
@@ -81,7 +81,7 @@ function Collection(props) {
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data } = await axios.post('https://mighty-refuge-61161.herokuapp.com/api/upload', formData, config);
+        const { data } = await axios.post('/api/upload', formData, config);
         setScan(data.scan);
       } catch (err) {
         console.log(err);
@@ -97,7 +97,7 @@ function Collection(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/collections/${id}`);
+        await axios.delete(`/api/collections/${id}`);
         window.location = '/collections';
       } catch (err) {
         console.log(err);

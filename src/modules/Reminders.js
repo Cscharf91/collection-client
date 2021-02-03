@@ -11,7 +11,7 @@ function Reminders(props) {
   useEffect(() => {
     const getReminders = async () => {
       try {
-        const { data } = await axios.get('https://mighty-refuge-61161.herokuapp.com/api/notes');
+        const { data } = await axios.get('/api/notes');
         setReminders(data);
         setIsLoading(false);
       } catch (err) {

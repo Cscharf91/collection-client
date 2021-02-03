@@ -13,7 +13,7 @@ function EditCollection(props) {
     const getCollection = async () => {
       try {
         const { data } = await axios.get(
-          `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`
+          `/api/collections/${props.match.params.id}`
         );
         setCollection({ ...data, practice: data.practice._id });
       } catch (err) {
@@ -23,7 +23,7 @@ function EditCollection(props) {
     const getPractices = async () => {
       try {
         const { data } = await axios.get(
-          "https://mighty-refuge-61161.herokuapp.com/api/practices"
+          "/api/practices"
         );
         setPractices(data);
       } catch (err) {
@@ -38,7 +38,7 @@ function EditCollection(props) {
     e.preventDefault();
     try {
       const data = await axios.patch(
-        `https://mighty-refuge-61161.herokuapp.com/api/collections/${props.match.params.id}`,
+        `/api/collections/${props.match.params.id}`,
         collection,
         token
       );

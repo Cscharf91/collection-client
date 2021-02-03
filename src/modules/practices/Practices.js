@@ -14,7 +14,7 @@ function Practices(props) {
     const getPractices = async () => {
       try {
         const { data } = await axios.get(
-          'https://mighty-refuge-61161.herokuapp.com/api/practices/'
+          '/api/practices/'
         );
         setPractices(data);
         setIsLoading(false);
@@ -40,7 +40,7 @@ function Practices(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`https://mighty-refuge-61161.herokuapp.com/api/practices/${id}`, token);
+        await axios.delete(`/api/practices/${id}`, token);
         const updatedPractices = practices.filter(practice => practice._id !== id);
         setPractices(updatedPractices);
       } catch (err) {
