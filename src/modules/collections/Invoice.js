@@ -85,7 +85,7 @@ function Invoice(props) {
               Cory@demobilling.com
             </p>
             <p>
-              (845) 219-5443
+              (123)-123-4567
             </p>
             <p className="letter-bottom">PLEASE PAY THIS AMOUNT: ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>
           </div>
