@@ -9,7 +9,7 @@ function Home(props) {
         <Reminders />
       }
       {!user &&
-        <h1>Please log in to view collections, practices, and notifications.</h1>
+        <h1>Demo Log In Info: Email: guest@guest.com - Password: guestpass1</h1>
       }
     </div>
   );
