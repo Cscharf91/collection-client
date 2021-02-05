@@ -12,7 +12,7 @@ function EditPractice(props) {
     const getPractice = async () => {
       try {
         const { data } = await axios.get(
-          `/api/practices/${props.match.params.id}`
+          `https://vast-ravine-96250.herokuapp.com/api/practices/${props.match.params.id}`
         );
         setPractice(data);
       } catch (err) {
@@ -27,7 +27,7 @@ function EditPractice(props) {
     e.preventDefault();
     try {
       const data = await axios.patch(
-        `/api/practices/${props.match.params.id}`,
+        `https://vast-ravine-96250.herokuapp.com/api/practices/${props.match.params.id}`,
         practice,
         token
       );

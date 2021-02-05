@@ -32,7 +32,7 @@ function CreateCollection(props) {
   useEffect(() => {
     const getPractices = async () => {
       try {
-        const { data } = await axios.get("/api/practices");
+        const { data } = await axios.get("https://vast-ravine-96250.herokuapp.com/api/practices");
         console.log(data);
         setPractices(data);
       } catch (err) {
@@ -47,7 +47,7 @@ function CreateCollection(props) {
     console.log(collection);
     try {
       const { data } = await axios.post(
-        "/api/collections",
+        "https://vast-ravine-96250.herokuapp.com/api/collections",
         collection,
         token
       );

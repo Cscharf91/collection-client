@@ -11,7 +11,7 @@ function Reminders(props) {
   useEffect(() => {
     const getReminders = async () => {
       try {
-        const { data } = await axios.get('/api/notes');
+        const { data } = await axios.get('https://vast-ravine-96250.herokuapp.com/api/notes');
         setReminders(data);
         setIsLoading(false);
       } catch (err) {

@@ -16,7 +16,7 @@ function Practice(props) {
     const getPractice = async () => {
       try {
         const { data } = await axios.get(
-          `/api/practices/${props.match.params.id}`
+          `https://vast-ravine-96250.herokuapp.com/api/practices/${props.match.params.id}`
         );
         setPractice(data);
         setIsLoading(false);
@@ -28,7 +28,7 @@ function Practice(props) {
     const getPracticeCollections = async () => {
       try {
         const { data } = await axios.get(
-          `/api/practices/${props.match.params.id}/collections`
+          `https://vast-ravine-96250.herokuapp.com/api/practices/${props.match.params.id}/collections`
         );
         setCollections(data);
         setFilteredCollections(data);
@@ -44,7 +44,7 @@ function Practice(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`/api/practices/${id}`, token);
+        await axios.delete(`https://vast-ravine-96250.herokuapp.com/api/practices/${id}`, token);
         window.location = '/practices';
       } catch (err) {
         console.log(err);

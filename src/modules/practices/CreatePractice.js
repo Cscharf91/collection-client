@@ -20,7 +20,7 @@ function CreatePractice(props) {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "/api/practices",
+        "https://vast-ravine-96250.herokuapp.com/api/practices",
         practice,
         token
       );

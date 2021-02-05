@@ -14,7 +14,7 @@ function Practices(props) {
     const getPractices = async () => {
       try {
         const { data } = await axios.get(
-          '/api/practices/'
+          'https://vast-ravine-96250.herokuapp.com/api/practices/'
         );
         setPractices(data);
         setIsLoading(false);
@@ -40,7 +40,7 @@ function Practices(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`/api/practices/${id}`, token);
+        await axios.delete(`https://vast-ravine-96250.herokuapp.com/api/practices/${id}`, token);
         const updatedPractices = practices.filter(practice => practice._id !== id);
         setPractices(updatedPractices);
       } catch (err) {

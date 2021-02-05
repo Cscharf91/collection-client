@@ -13,7 +13,7 @@ function Invoice(props) {
 
     const getCollection = async () => {
       try {
-        const { data } = await axios.get(`/api/collections/${props.match.params.id}`)
+        const { data } = await axios.get(`https://vast-ravine-96250.herokuapp.com/api/collections/${props.match.params.id}`)
         setCollection(data);
         console.log(data);
       } catch (err) {

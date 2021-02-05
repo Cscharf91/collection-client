@@ -17,7 +17,7 @@ function Collections(props) {
     const getCollections = async () => {
       try {
         const { data } = await axios.get(
-          '/api/collections/'
+          'https://vast-ravine-96250.herokuapp.com/api/collections/'
         );
         setIsLoading(false);
         setCollections(data);
@@ -53,7 +53,7 @@ function Collections(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`/api/collections/${id}`, token);
+        await axios.delete(`https://vast-ravine-96250.herokuapp.com/api/collections/${id}`, token);
         const updatedCollections = collections.filter(collection => collection._id !== id);
         setCollections(updatedCollections);
       } catch (err) {
