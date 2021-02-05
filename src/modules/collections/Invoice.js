@@ -31,10 +31,10 @@ function Invoice(props) {
             <div className="left-header">
               <h2>Demo Billing LLC.</h2>
               <p>A Professional Debt Collection Agency</p>
-              <p>P.O Box 1778</p>
-              <p>New City, New York 10956</p>
-              <p>(845) 219-5443</p>
-              <p>LICENSE NUMBER: 2097549-DCA</p>
+              <p>10 Fake St</p>
+              <p>Fakestown, New York 12345</p>
+              <p>(123)-123-4567</p>
+              <p>LICENSE NUMBER: 123123-ABC</p>
               <p>Account Number: {collection.practice.code}{collection.accountNumber}</p>
               <p>{DateTime.local().toLocaleString()}</p>
               <p>Amount Due: ${(parseFloat(collection.amountDue) - parseFloat(collection.amountPaid)).toFixed(2)}</p>
@@ -82,7 +82,7 @@ function Invoice(props) {
               pay online, please contact Demo Billing LLC at:
             </p>
             <p>
-              Mike@Demobilling.com
+              Cory@demobilling.com
             </p>
             <p>
               (845) 219-5443
