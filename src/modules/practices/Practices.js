@@ -24,7 +24,7 @@ function Practices(props) {
       }
     };
     getPractices();
-  }, [props.match.params.id]);
+  }, []);
 
   const handleChange = e => {
     setSearch(e.target.value);
@@ -40,7 +40,7 @@ function Practices(props) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm('Are you sure you want to delete this?')) {
       try {
-        await axios.delete(`https://vast-ravine-96250.herokuapp.com/api/practices/${id}`, token);
+        await axios.delete(`https://thawing-mountain-86418.herokuapp.com/api/practices/${id}`, token);
         const updatedPractices = practices.filter(practice => practice._id !== id);
         setPractices(updatedPractices);
       } catch (err) {
@@ -50,7 +50,8 @@ function Practices(props) {
   }
 
   return (
-    <div>
+    <div className="column2">
+      <h1 className="centered">Practices</h1>
       <div className="searchbox">
         <h3>Search by Code:</h3>
         <form onSubmit={handleSubmit}>
@@ -58,17 +59,21 @@ function Practices(props) {
           <button className="primary" type="submit">Submit</button>
         </form>
       </div>
-      {isLoading && <div className="card"><h3>Loading...</h3></div>}
-      {practices.map(practice => (
-        <div className="card">
-          <PracticeComponent practice={practice} />
-          <Link to={`/practices/${practice._id}`}><p>View Practice/Collections</p></Link>
-          <Link to={`/practices/${practice._id}/edit`}><p>Edit Practice</p></Link>
-          <button onClick={() => handleDelete(practice._id)} className="danger">Delete</button>
+      {/* <div className="big-card"> */}
+        {isLoading && <h3>Loading...</h3>}
+        <div className="container-grid">
+          {practices.map(practice => (
+            <div className="card-2">
+              <PracticeComponent practice={practice} />
+              <Link to={`/practices/${practice._id}`}><p>View Practice/Collections</p></Link>
+              <Link to={`/practices/${practice._id}/edit`}><p>Edit Practice</p></Link>
+              <button onClick={() => handleDelete(practice._id)} className="danger">Delete</button>
+            </div>
+          ))}
+          {error && <p>{error}</p>}
         </div>
-      ))}
-      {error && <p>{error}</p>}
-    </div>
+      </div>
+    // </div>
   );
 }
 
