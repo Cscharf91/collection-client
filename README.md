@@ -1,5 +1,5 @@
 # Demo Collection Website
-This is a demo of a project made for a client's collection company. [Click here to view the github repo for the Express.js server API](https://github.com/Cscharf91/collection-server).
+This is the client demo of a project made for a client's collection company.
 
 ## Features:
 
